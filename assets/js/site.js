@@ -20,7 +20,7 @@ var CFG = {
   arch:    { spin: 'none', pulse: 0.3, dim: 1 }
 };
 var CAR_KEYS = ['neuron', 'dna', 'play', 'coach'];
-var RECT_MOB = [-0.84, 0.84, 0.16, 0.86];
+var RECT_MOB = [-0.8, 0.8, 0.2, 0.72];
 var RECT_MOB_CAR = [-0.8, 0.8, -0.12, 0.5];
 /* brain regions, MNI millimetres: centre used for the camera and the label */
 var REGIONS = [null,
@@ -190,15 +190,19 @@ class Component extends DCLogic {
     const W = window.innerWidth, H = window.innerHeight;
     if (H > 1500 || H < 300) return;
     this.W = W; this.H = H;
+    /* phones: lock the layout height to the tall viewport so Safari's address bar showing or hiding never re-measures the page */
+    if (W < 820) { const pr = document.createElement('div'); pr.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:100vh;visibility:hidden;pointer-events:none'; document.body.appendChild(pr); const lv = pr.offsetHeight; pr.remove(); if (lv > H && lv < H * 1.4) this.H = lv; }
+    { const fld = root.querySelector('.field'); if (fld) { fld.style.height = W < 820 ? this.H + 'px' : ''; fld.style.bottom = W < 820 ? 'auto' : ''; } }
     this.q = (s) => root.querySelector(s);
     this.qa = (s, el) => Array.prototype.slice.call((el || root).querySelectorAll(s));
     this.reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     this.mob = W < 820;
-    this.carPin = !this.reduced && !this.mob;
+    this.carPin = !this.reduced;
     root.classList.add('js-on');
     if (this.mob) root.classList.add('mob');
     if (!this.carPin) root.classList.add('nopin');
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     this.ctx = gsap.context(() => {}, root);
     this.mx = this.my = this.mxs = this.mys = 0;
     this.st = { reveal: 0, push: 0, form: 1, gold: 1, mv: 1 };
@@ -206,7 +210,7 @@ class Component extends DCLogic {
     if (this.sc) ScrollTrigger.defaults({ scroller: this.sc });
     if (!this.reduced && !this.sc && window.Lenis) {
       try {
-        const lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, virtualScroll: (e) => {
+        const lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, syncTouch: this.mob, syncTouchLerp: 0.1, touchInertiaMultiplier: 28, virtualScroll: (e) => {
           /* lighter scrolling between miGRIND, TAAP and the carousel, and from How I use AI to the end */
           const y = this.scrollY(), z = this.fastZones || [];
           for (let i = 0; i < z.length; i++) if (y >= z[i][0] && y <= z[i][1]) { e.deltaY *= 1.4; break; }
@@ -230,7 +234,7 @@ class Component extends DCLogic {
     this.on(window, 'resize', rs); this.on(window, 'orientationchange', rs); this.on(document, 'fullscreenchange', rs); this.on(document, 'webkitfullscreenchange', rs);
     if (window.visualViewport) this.on(window.visualViewport, 'resize', rs);
     /* watchdog: if the viewport or page height changed without an event, rebuild anyway */
-    this._wd = setInterval(() => { if (this._dead) return; if (window.innerWidth !== this._vw || window.innerHeight !== this._vh) rs(); else if (Math.abs(document.documentElement.scrollHeight - this._docH) > 4) { ScrollTrigger.refresh(); } }, 700);
+    this._wd = setInterval(() => { if (this._dead) return; if (window.innerWidth !== this._vw || (!this.mob && window.innerHeight !== this._vh)) rs(); else if (Math.abs(document.documentElement.scrollHeight - this._docH) > 4) { ScrollTrigger.refresh(); } }, 700);
     this._offs.push(() => clearInterval(this._wd));
     this.on(document, 'visibilitychange', () => {
       if (document.hidden) { this._run = false; if (this._raf) cancelAnimationFrame(this._raf); }
@@ -257,7 +261,8 @@ class Component extends DCLogic {
     return null;
   }
   scrollY() { return this.sc ? this.sc.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0); }
-  maxScroll() { return this.sc ? this.sc.scrollHeight - this.sc.clientHeight : document.documentElement.scrollHeight - window.innerHeight; }
+  VH() { return this.mob ? this.H : window.innerHeight; }
+  maxScroll() { return this.sc ? this.sc.scrollHeight - this.sc.clientHeight : document.documentElement.scrollHeight - this.VH(); }
   docTop(el) { const base = this.sc ? this.sc.getBoundingClientRect().top : 0; return el.getBoundingClientRect().top - base + this.scrollY(); }
   scrollToY(y) {
     y = Math.max(0, Math.min(this.maxScroll(), y));
@@ -327,7 +332,7 @@ class Component extends DCLogic {
         });
         if (this.reduced) { tl.progress(1); return; }
         ScrollTrigger.create({ trigger: row, start: 'top 94%', onEnter: () => tl.play(), onLeaveBack: () => tl.pause(0) });
-        if (row.getBoundingClientRect().top < window.innerHeight * 0.94) tl.progress(1);
+        if (row.getBoundingClientRect().top < this.VH() * 0.94) tl.progress(1);
       });
       const track = this.q('.car-track'), slides = this.qa('.slide');
       if (this.carPin && track) {
@@ -337,7 +342,7 @@ class Component extends DCLogic {
         for (let k = 1; k < nS; k++) tw.to(track, { x: () => -slides[k].offsetLeft, duration: 1 });
         this.slideHold = slides.map((s, k) => [k / units, k / units]);
         const fade = this._fade = () => slides.forEach((s) => { const sc = s.querySelector('.sc'); if (!sc) return; const L = s.getBoundingClientRect().left; const o = Math.max(0, Math.min(1, 1 - Math.abs(L) / (window.innerWidth * 0.55))); sc.style.opacity = String(o); sc.style.transform = 'translate3d(' + (Math.max(0, L) * 0.08) + 'px,0,0)'; });
-        this.carST = ScrollTrigger.create({ trigger: '.car', pin: true, start: 'top top', end: () => '+=' + Math.round(window.innerHeight * 0.58 * units), scrub: 0.3, animation: tw, invalidateOnRefresh: true, onUpdate: fade, onRefresh: fade });
+        this.carST = ScrollTrigger.create({ trigger: '.car', pin: true, start: 'top top', end: () => '+=' + Math.round(this.VH() * 0.58 * units), scrub: 0.3, animation: tw, invalidateOnRefresh: true, onUpdate: fade, onRefresh: fade });
       }
     }, this.root);
   }
@@ -394,8 +399,9 @@ class Component extends DCLogic {
   onResize() {
     if (this._dead) return;
     const W = window.innerWidth, H = window.innerHeight;
+    if (this.mob && W === this.W) return;
     if ((W < 820) !== this.mob || H > 1500 || !this.root) { this.teardown(); this.setup(); return; }
-    this.W = W; this.H = H;
+    this.W = W; this.H = this.mob ? this.H : H;
     if (this.G) {
       this.G.renderer.setSize(W, H, false);
       this.G.camera.aspect = W / H; this.G.camera.updateProjectionMatrix();
@@ -438,7 +444,7 @@ class Component extends DCLogic {
   /* one shape per section, fixed at the middle of the screen beside its copy. The DNA transition starts when the bottom of a
      section's text reaches 85% of the viewport and finishes when the next section's heading reaches 40% */
   measureStops() {
-    const vh = window.innerHeight, list = [], mob = this.mob;
+    const vh = this.VH(), list = [], mob = this.mob;
     const byId = (id) => document.getElementById(id);
     const T = (el) => this.docTop(el), B = (el) => this.docTop(el) + el.offsetHeight;
     const mid = (el) => T(el) + el.offsetHeight / 2 - vh / 2;
@@ -446,7 +452,7 @@ class Component extends DCLogic {
     const enter = (head) => T(head) - 0.4 * vh, leave = (block) => B(block) - 0.85 * vh;
     /* each section's shape is complete when the middle of its text block reaches the middle of the viewport, and starts flowing on from that same point */
     /* a shape is fully formed when its text block's top reaches the middle of the screen, and starts flowing on when the block's centre reaches 70% */
-    const holdAt = (top, h, k, extra) => { const ar = top - 0.42 * vh, dp = Math.max(top + h / 2 - 0.7 * vh, top - 0.35 * vh); const ex = Object.assign({ track: mob ? top - 0.55 * vh : top + h / 2 - vh / 2 }, extra || {}); add(ar, k, ex); add(dp, k, ex); return [ar, dp]; };
+    const holdAt = (top, h, k, extra) => { const ar = top - 0.42 * vh, dp = mob ? Math.max(top + h - 0.38 * vh, ar + 2) : Math.max(top + h / 2 - 0.7 * vh, top - 0.35 * vh); const ex = Object.assign({ track: mob ? top - 0.55 * vh : top + h / 2 - vh / 2 }, extra || {}); add(ar, k, ex); add(dp, k, ex); return [ar, dp]; };
     const hold = (head, block, k, extra) => holdAt(T(block), block.offsetHeight, k, extra);
     add(0, 'brain');
     const paras = this.qa('.story p.big'), regs = [1, 3], scol = this.q('.story .col');
@@ -454,7 +460,7 @@ class Component extends DCLogic {
     if (paras.length) { const lp = paras[paras.length - 1], ri = regs[paras.length - 1] || 3; add(mid(lp) + 0.15 * vh, 'inside', { reg: ri, off: this.insideOff(ri) }); }
     const bld = byId('building');
     if (bld) holdAt(T(bld) + 0.4 * vh, 0.2 * vh, 'words');
-    const mhead = this.q('#migrind .p-title'), mcol = this.q('#migrind .mg-in .col'), phn = this.q('.phone-wrap .phone');
+    const mhead = this.q('#migrind .p-title'), mcol = this.q(mob ? '#migrind .mg-in' : '#migrind .mg-in .col'), phn = this.q('.phone-wrap .phone');
     if (mhead && mcol) {
       this.webScreenY = null;
       hold(mhead, mcol, 'web', phn ? { track: T(phn) + phn.offsetHeight / 2 - (mob ? 0.32 : 0.5) * vh } : null);
@@ -479,6 +485,8 @@ class Component extends DCLogic {
     if (chd && ccol) hold(chd, ccol, 'ecg', { track: mid(ccol) });
     const fin = byId('contact'), fn = this.q('.fname');
     if (fin) { const fb = fn ? fn.parentNode : fin; const ay = Math.min(this.maxScroll(), Math.max(T(fb) - 0.5 * vh, mid(fb) - 0.15 * vh)); add(ay, 'arch', { track: ay }); }
+    /* phones: every change of shape gets at least half a screen of scrolling so the helix never snaps */
+    if (mob) for (let i = 1; i < list.length; i++) { const p0 = list[i - 1], p1 = list[i]; if (p0.k !== p1.k && p0.k !== 'brain' && p1.y - p0.y < 0.55 * vh && i >= 2 && list[i - 2].k === p0.k) p0.y = Math.max(list[i - 2].y + 2, p1.y - 0.55 * vh); }
     const mx = this.maxScroll();
     list.forEach((x) => { x.y = Math.max(0, Math.min(mx, x.y)); if (x.track != null) x.track = Math.min(mx, x.track); });
     for (let i = 1; i < list.length; i++) if (list[i].y <= list[i - 1].y) list[i].y = list[i - 1].y + 1;
@@ -790,7 +798,7 @@ class Component extends DCLogic {
     const sh = this.shapes = {}, n = this.N;
     this.webRaw = this.gen('web', n);
     sh.web = this.fitWeb();
-    sh.ball = this.fit(this.gen('heart', n), CFG.ball.rect, true);
+    sh.ball = this.fit(this.gen('heart', n), CFG.ball.rect, true, this.mob ? this.slotRect(this.q('#taap .shape-slot')) : null);
     this.qa('.slide').forEach((sl, i) => { const k = CAR_KEYS[i]; if (k) sh[k] = this.fitSlide(this.gen(k, n), sl, k === 'dna'); });
     this.brainFit();
     sh.brain = this.bHero; sh.bLoad = this.bLoad; sh.brainAI = this.bAI; sh.inside = this.bIn;
@@ -799,10 +807,15 @@ class Component extends DCLogic {
     sh.arch = this.genArch();
     this.pairKey = '';
   }
+  slotRect(el) {
+    if (!el || !el.offsetHeight) return null;
+    const hy = el.offsetHeight / this.VH(), hx = Math.min(0.92, el.offsetWidth / this.W);
+    return [-hx, hx, -hy, hy];
+  }
   /* each experience's shape sits right beside its own copy, 64px away */
   fitSlide(raw, slide, rot) {
-    if (this.mob) return this.fit(raw, null, rot, RECT_MOB_CAR);
-    const sc = slide.querySelector('.sc'), vh = window.innerHeight;
+    if (this.mob) return this.fit(raw, null, rot, this.slotRect(slide.querySelector('.shape-slot')) || RECT_MOB_CAR);
+    const sc = slide.querySelector('.sc'), vh = this.VH();
     const big = slide.id === 'training';
     const left = Math.max(this.W * 0.5, (sc ? sc.offsetLeft - slide.offsetLeft + sc.offsetWidth : this.W * 0.48) + 56);
     const right = this.W * 0.96;
@@ -822,7 +835,7 @@ class Component extends DCLogic {
 
   /* the four objects sit around the phone, each feeding a gold thread into it */
   fitWeb() {
-    const n = this.N, raw = this.webRaw, hw = this.HW(), H0 = this.H0(), vh = window.innerHeight, k = 2 * hw / this.W;
+    const n = this.N, raw = this.webRaw, hw = this.HW(), H0 = this.H0(), vh = this.VH(), k = 2 * hw / this.W;
     const ph = this.q('.phone-wrap .phone'), pw = this.q('.phone-wrap'), mgIn = this.q('.mg-in');
     let cxPx = this.W * 0.74, cyPx = vh * 0.5, halfW = 160, halfH = 330;
     if (ph) {
@@ -893,7 +906,7 @@ class Component extends DCLogic {
   /* a long heartbeat line across the screen, behind and below the healthcare copy */
   genEcg() {
     const n = this.N, r = this.rng(616), p = new Float32Array(n * 3), g = new Float32Array(n), l = new Float32Array(n), hw = this.HW(), H0 = this.H0();
-    const cc = this.q('#care .care-in'), ybPx = Math.min(window.innerHeight * 0.97, window.innerHeight * 0.5 + (cc ? cc.offsetHeight / 2 : 200) + (this.mob ? 60 : 115)), yb = (1 - ybPx / window.innerHeight * 2) * H0, amp = (this.mob ? 0.16 : 0.24) * H0, period = this.mob ? 1.1 : 1.7, x0 = -hw * 1.15, x1 = hw * 1.15;
+    const cc = this.q('#care .care-in'), ybPx = Math.min(this.VH() * 0.97, this.VH() * 0.5 + (cc ? cc.offsetHeight / 2 : 200) + (this.mob ? 60 : 115)), yb = (1 - ybPx / this.VH() * 2) * H0, amp = (this.mob ? 0.16 : 0.24) * H0, period = this.mob ? 1.1 : 1.7, x0 = -hw * 1.15, x1 = hw * 1.15;
     const wave = (x) => {
       const ph = ((x - x0) % period + period) % period / period;
       const bump = (c, w, h) => h * Math.exp(-Math.pow((ph - c) / w, 2));
@@ -912,7 +925,7 @@ class Component extends DCLogic {
     const line = this.q('.arch-line'), fin = document.getElementById('contact');
     const out = { p: p, g: g, l: l, c: [0, 0, 0] };
     if (!line || !fin || !this.seed) return out;
-    const H0 = this.H0(), hw = this.HW(), vh = window.innerHeight;
+    const H0 = this.H0(), hw = this.HW(), vh = this.VH();
     const yS = this.archY != null ? this.archY : Math.min(this.maxScroll(), this.docTop(fin) + fin.offsetHeight / 2 - vh / 2);
     const shot = line.parentNode, fr = fin.getBoundingClientRect();
     const top = this.docTop(fin) + shot.offsetTop + line.offsetTop - yS, left = fr.left + shot.offsetLeft + line.offsetLeft, w = line.offsetWidth, h = line.offsetHeight;
@@ -1024,7 +1037,7 @@ class Component extends DCLogic {
     if (!G || !this.shapes) return;
     this.mxs += (this.mx - this.mxs) * 0.05; this.mys += (this.my - this.mys) * 0.05;
     const loading = this.root.classList.contains('loading');
-    const sy = this.scrollY(), vh = window.innerHeight, H0 = this.H0();
+    const sy = this.scrollY(), vh = this.VH(), H0 = this.H0();
     let m = loading ? 0 : this.mAt(sy);
     if (this.reduced) m = Math.round(m);
     const S = this.stops || [{ k: 'brain', y: 0 }];
@@ -1161,7 +1174,7 @@ class Component extends DCLogic {
     G.renderer.render(G.scene, G.camera);
   }
   blockEl(k) {
-    const sel = { inside: '.story .col', words: '#building', web: '#migrind .mg-in .col', ball: '#taap .col', brainAI: '#ai .col', ecg: '#care .care-in', arch: '#contact' }[k] || (CAR_KEYS.indexOf(k) >= 0 ? '.car-head' : null);
+    const sel = { inside: '.story .col', words: '#building', web: this.mob ? '#migrind .mg-in' : '#migrind .mg-in .col', ball: '#taap .col', brainAI: '#ai .col', ecg: '#care .care-in', arch: '#contact' }[k] || (CAR_KEYS.indexOf(k) >= 0 ? '.car-head' : null);
     if (!sel) return null;
     this._blk = this._blk || {};
     return this._blk[sel] || (this._blk[sel] = this.q(sel));
@@ -1171,7 +1184,7 @@ class Component extends DCLogic {
     if (!sel) return true;
     const el = this._secEl && this._secEl[sel] || ((this._secEl = this._secEl || {})[sel] = this.q(sel));
     if (!el) return true;
-    const r = el.getBoundingClientRect(), vh = window.innerHeight;
+    const r = el.getBoundingClientRect(), vh = this.VH();
     return r.top < vh * 0.97 && r.bottom > vh * 0.03;
   }
   /* small gold label beside the glowing region */
@@ -1192,9 +1205,9 @@ class Component extends DCLogic {
       V.set(B.c[0] + x * cs + z * sn, B.c[1] + R[1] * s, -x * sn + z * cs);
     }
     V.project(this.G.camera);
-    const px = (V.x + 1) / 2 * this.W, py = (1 - V.y) / 2 * window.innerHeight;
+    const px = (V.x + 1) / 2 * this.W, py = (1 - V.y) / 2 * this.VH();
     if (el._r !== reg) { el.textContent = REGIONS[reg].name; el._r = reg; }
-    const w = el.offsetWidth || 160, ins = key === 'inside', x = Math.max(12, Math.min(this.W - w - 12, ins ? px - w / 2 : px + 30)), y = Math.max(150, Math.min(window.innerHeight - 40, ins ? py + (this.mob ? 150 : 250) : py - 30));
+    const w = el.offsetWidth || 160, ins = key === 'inside', x = Math.max(12, Math.min(this.W - w - 12, ins ? px - w / 2 : px + 30)), y = Math.max(150, Math.min(this.VH() - 40, ins ? py + (this.mob ? 150 : 250) : py - 30));
     el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
     const o = Math.max(0, Math.min(1, (act - 0.6) / 0.35)) * 0.9;
     el.style.opacity = o.toFixed(3); el._o = o;
