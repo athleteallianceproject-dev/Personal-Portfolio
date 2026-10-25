@@ -5,6 +5,7 @@ var CHUNKS = ['assets/data/brain-0.json', 'assets/data/brain-1.json', 'assets/da
 var CH_SIZE = 5500;
 /* one target shape per section; brain variants share the same particles so the camera can travel through them */
 var CFG = {
+  bLoad:   { spin: 'osc', pulse: 0.7, dim: 1.3, brain: true, imp: 0.4 },
   brain:   { rect: [-0.1, 0.97, -0.76, 0.72], spin: 'osc', pulse: 0.7, dim: 1.25, brain: true, imp: 0.4 },
   inside:  { spin: 'none', pulse: 0.45, dim: 1, brain: true },
   words:   { spin: 'none', pulse: 0.25, dim: 1 },
@@ -45,6 +46,7 @@ var VERT = [
 'uniform float uT; uniform vec3 uCA; uniform vec3 uCB; uniform float uRA; uniform float uRB; uniform float uSA; uniform float uSB;',
 'uniform float uNoStag; uniform vec3 uOffA; uniform vec3 uOffB; uniform float uStrand; uniform float uSag; uniform float uImp;',
 'uniform float uKaS; uniform float uKA; uniform float uKB; uniform float uScA; uniform float uScB; uniform vec3 uM; uniform float uEcg; uniform float uHWv;',
+'uniform float uForm; uniform float uGold;',
 'uniform float uRW[6]; uniform float uRAct; uniform float uFire; uniform vec3 uFA[12]; uniform vec3 uFB[12];',
 'uniform float uTime; uniform float uReveal; uniform float uPix; uniform float uPulse; uniform float uDim;',
 'varying vec3 vCol; varying float vA;',
@@ -99,7 +101,9 @@ var VERT = [
 '    firePulse = exp(-pow((tt - ph) * 9.0, 2.0));',
 '    p = mix(p, lp, uFire); fireOn = uFire;',
 '  }',
-'  float vis = step(aOrder, uReveal);',
+'  float fk = clamp(uForm * 1.45 - aOrder * 0.3 - hsh(aSeed + 0.37) * 0.15, 0.0, 1.0); fk = fk * fk * (3.0 - 2.0 * fk);',
+'  if (uForm < 1.0) p = mix(p + normalize(jit + vec3(0.001)) * (1.4 + hsh(aSeed + 0.71) * 2.2) + vec3(0.0, 0.0, 1.2 * hsh(aSeed + 0.19)), p, fk);',
+'  float vis = step(aOrder, uReveal) * mix(0.55, 1.0, fk) * clamp(uForm * 6.0 + 0.25, 0.0, 1.0);',
 '  float pop = vis * (1.0 - clamp((uReveal - aOrder) / 0.035, 0.0, 1.0));',
 '  float kind = fract(aSeed * 13.7);',
 '  float isGold = step(0.86, kind) * (1.0 - uRAct * 0.8);',
@@ -135,6 +139,8 @@ var VERT = [
 '  vec3 blue = vec3(0.6, 0.78, 1.0); vec3 white = vec3(0.97, 0.96, 0.94); vec3 gold = vec3(1.0, 0.77, 0.4);',
 '  vec3 base = kind < 0.6 ? blue : white;',
 '  base = mix(base, vec3(1.0, 0.95, 0.86), cream);',
+'  g *= uGold; pulse *= uGold; imp *= uGold;',
+'  base = mix(vec3(0.94, 0.95, 0.97), base, uGold);',
 '  vCol = mix(base, gold, clamp(g + pulse, 0.0, 1.0)) + pop * 0.4 + imp * vec3(0.25, 0.18, 0.05);',
 '  vCol = mix(vCol, rungGold > 0.5 ? vec3(1.0, 0.8, 0.46) : vec3(1.0, 0.9, 0.7), onStrand * 0.88);',
 '  vec4 mv = modelViewMatrix * vec4(p, 1.0);',
@@ -195,7 +201,7 @@ class Component extends DCLogic {
     gsap.registerPlugin(ScrollTrigger);
     this.ctx = gsap.context(() => {}, root);
     this.mx = this.my = this.mxs = this.mys = 0;
-    this.st = { reveal: 0, push: 0 };
+    this.st = { reveal: 0, push: 0, form: 1, gold: 1, mv: 1 };
     this.sc = this.findScroller();
     if (this.sc) ScrollTrigger.defaults({ scroller: this.sc });
     if (!this.reduced && !this.sc && window.Lenis) {
@@ -535,7 +541,7 @@ class Component extends DCLogic {
       uniforms: {
         uT: { value: 0 }, uCA: { value: V3() }, uCB: { value: V3() }, uRA: { value: 0 }, uRB: { value: 0 }, uSA: { value: 1 }, uSB: { value: 1 }, uVC: { value: V3() },
         uNoStag: { value: 0 }, uStrand: { value: 1 }, uSag: { value: 0.3 }, uImp: { value: 0 }, uKaS: { value: 0.32 }, uKA: { value: 0 }, uKB: { value: 0 }, uScA: { value: 1 }, uScB: { value: 1 }, uM: { value: V3() }, uEcg: { value: 0 }, uHWv: { value: 3 }, uOffA: { value: V3() }, uOffB: { value: V3() },
-        uRW: { value: [0, 0, 0, 0, 0, 0] }, uRAct: { value: 0 }, uFire: { value: 0 }, uFA: { value: Array.from({ length: 12 }, () => V3()) }, uFB: { value: Array.from({ length: 12 }, () => V3()) },
+        uForm: { value: 1 }, uGold: { value: 1 }, uRW: { value: [0, 0, 0, 0, 0, 0] }, uRAct: { value: 0 }, uFire: { value: 0 }, uFA: { value: Array.from({ length: 12 }, () => V3()) }, uFB: { value: Array.from({ length: 12 }, () => V3()) },
         uTime: { value: 0 }, uReveal: { value: 0 }, uPix: { value: renderer.getPixelRatio() }, uPulse: { value: 0.5 }, uDim: { value: 1 }
       }
     });
@@ -787,7 +793,7 @@ class Component extends DCLogic {
     sh.ball = this.fit(this.gen('heart', n), CFG.ball.rect, true);
     this.qa('.slide').forEach((sl, i) => { const k = CAR_KEYS[i]; if (k) sh[k] = this.fitSlide(this.gen(k, n), sl, k === 'dna'); });
     this.brainFit();
-    sh.brain = this.bHero; sh.brainAI = this.bAI; sh.inside = this.bIn;
+    sh.brain = this.bHero; sh.bLoad = this.bLoad; sh.brainAI = this.bAI; sh.inside = this.bIn;
     sh.words = this.genWords();
     sh.ecg = this.genEcg();
     sh.arch = this.genArch();
@@ -860,6 +866,7 @@ class Component extends DCLogic {
       return B;
     };
     this.bHero = mk(this.mob ? RECT_MOB : CFG.brain.rect, this.bHero);
+    this.bLoad = mk(this.mob ? [-0.86, 0.86, -0.42, 0.42] : [-0.42, 0.42, -0.6, 0.6], this.bLoad);
     this.bAI = mk(this.mob ? RECT_MOB : CFG.brainAI.rect, this.bAI);
     const S = this.insideS = this.mob ? 2.1 : 2.4;
     if (!this.bIn) this.bIn = { p: new Float32Array(n * 3), g: new Float32Array(n), l: this.brainL, c: [0, 0, 0] };
@@ -946,25 +953,26 @@ class Component extends DCLogic {
   /* ---------- loader ---------- */
   loader() {
     const root = this.root, num = this.q('.ld-n');
-    let seen = false;
-    try { seen = sessionStorage.getItem('ab-mind4') === '1'; } catch (e) {}
     const reveal = () => {
       root.classList.remove('loading');
       if (this.lenis) this.lenis.start();
       ScrollTrigger.refresh();
       this.ctx.add(() => {
-        gsap.fromTo('.hero .name', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 1.0, ease: 'power3.out' });
-        if (!this.reduced) gsap.fromTo(this.qa('.hero .stmt .w'), { yPercent: 120 }, { yPercent: 0, duration: 0.9, stagger: 0.04, ease: 'power3.out', delay: 0.2 });
-        gsap.fromTo('.hero .small, .cue', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, delay: 0.6 });
+        gsap.fromTo('.hero .name', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.25 });
+        if (!this.reduced) gsap.fromTo(this.qa('.hero .stmt .w'), { yPercent: 120 }, { yPercent: 0, duration: 0.9, stagger: 0.04, ease: 'power3.out', delay: 0.45 });
+        gsap.fromTo('.hero .small, .cue', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, delay: 0.85 });
       });
     };
     if (!this.glOk) { reveal(); return; }
-    if (!seen) { root.classList.add('loading'); if (this.lenis) this.lenis.stop(); }
+    /* a 2 second intro every visit: white specks gather into the brain, gold lights it, then the page opens */
+    root.classList.add('loading'); if (this.lenis) this.lenis.stop();
+    window.scrollTo(0, 0);
+    this.st.form = 0; this.st.gold = 0; this.st.mv = 0; this.st.reveal = 0;
     const nUsed = this.mob ? 2 : 5;
     const prog = { bytes: new Array(nUsed).fill(0), lens: new Array(nUsed).fill(89000), parsed: 0, fonts: 0 };
     const real = () => Math.min(1, prog.bytes.reduce((a, v) => a + v, 0) / prog.lens.reduce((a, v) => a + v, 0)) * 0.86 + prog.fonts * 0.14;
-    let shown = 0, finished = false, arrived = 0;
-    const t0 = performance.now();
+    let finished = false, arrived = 0;
+    const t0 = performance.now(), MIN = 2000, MAX = 6000;
     const fontP = document.fonts && document.fonts.load ? Promise.all([document.fonts.load('80px Allura'), document.fonts.load('40px Fraunces'), document.fonts.load('16px Inter')]) : Promise.resolve();
     fontP.then(() => { prog.fonts = 1; }, () => { prog.fonts = 1; });
     for (let k = 0; k < nUsed; k++) {
@@ -983,20 +991,23 @@ class Component extends DCLogic {
     }
     const tick = () => {
       if (this._dead || finished) return;
-      const rr = real();
-      shown = Math.min(rr, shown + Math.max(0.006, (rr - shown) * 0.22));
+      const el = performance.now() - t0, rr = real(), done = rr >= 0.999 && prog.parsed >= nUsed;
+      const tf = Math.min(1, el / (MIN * 0.85));
+      const shown = Math.min(done ? 1 : rr, tf);
       if (num) num.textContent = String(Math.round(shown * 100));
-      this.st.reveal += (Math.min(1, Math.min(shown / 0.96, prog.parsed / nUsed + 0.03)) - this.st.reveal) * 0.22;
-      const el = performance.now() - t0;
-      if ((rr >= 0.999 && prog.parsed >= nUsed && shown >= 0.995) || el > 2500 || seen) {
+      this.st.reveal = Math.min(1.05, prog.parsed / nUsed + 0.05);
+      this.st.form += (Math.min(shown, 1) - this.st.form) * 0.12;
+      if ((done && el >= MIN) || el > MAX) {
         finished = true;
-        try { sessionStorage.setItem('ab-mind4', '1'); } catch (e) {}
         if (num) num.textContent = '100';
         this.ctx.add(() => {
-          gsap.to(this.st, { reveal: 1.05, duration: seen ? 0.01 : 0.3 });
-          if (!seen && !this.reduced) gsap.fromTo(this.st, { push: 0 }, { push: 1, duration: 1.3, ease: 'power2.inOut' });
-          else this.st.push = 1;
-          gsap.delayedCall(seen ? 0 : 0.35, reveal);
+          const tl = gsap.timeline();
+          tl.to(this.st, { form: 1, reveal: 1.05, duration: 0.25 }, 0);
+          tl.to(this.st, { gold: 1, duration: 0.8, ease: 'power2.out' }, 0.05);
+          tl.add(reveal, 0.65);
+          if (!this.reduced) tl.to(this.st, { mv: 1, duration: 1.4, ease: 'power3.inOut' }, 0.6);
+          else tl.set(this.st, { mv: 1 }, 0.6);
+          this.st.push = 1;
         });
         return;
       }
@@ -1028,6 +1039,8 @@ class Component extends DCLogic {
         sa = sb = {};
       }
     }
+    /* intro: the brain forms at the centre of the screen, lights up gold, then glides into the hero */
+    if (this.st.mv < 1) { a = 'bLoad'; b = 'brain'; f = this.st.mv; sa = sb = {}; }
     if (!this.shapes[a]) a = 'brain';
     if (!this.shapes[b]) b = 'brain';
     /* every shape is tied to its own section: it can only show while that section is on screen */
@@ -1042,7 +1055,8 @@ class Component extends DCLogic {
     const lerp = (x, y, q) => x + (y - x) * q;
     /* holds inside one section never re-run the morph: only the camera, rotation and glow move */
     u.uT.value = same ? 0 : f;
-    u.uNoStag.value = (a === 'brain' && b === 'inside') ? 1 : 0;
+    u.uNoStag.value = ((a === 'brain' && b === 'inside') || a === 'bLoad') ? 1 : 0;
+    u.uForm.value = this.st.form; u.uGold.value = this.st.gold;
     const offOf = (st) => st && st.off ? st.off : [0, 0, 0];
     const oa = offOf(sa), ob = offOf(sb);
     const kx = 2 * this.HW() / this.W, sl = this.slidesEl || (this.slidesEl = this.qa('.slide'));
@@ -1086,7 +1100,7 @@ class Component extends DCLogic {
     u.uRA.value = this.spinAngle(a, t) + (same ? lerp(rotA, rotB, f) : rotA);
     u.uRB.value = same ? u.uRA.value : this.spinAngle(b, t) + rotB;
     const br = 1 + 0.012 * Math.sin(t * 1.2);
-    u.uSA.value = (a === 'brain' || a === 'brainAI') ? br : 1; u.uSB.value = (b === 'brain' || b === 'brainAI') ? br : 1;
+    u.uSA.value = (a === 'brain' || a === 'brainAI' || a === 'bLoad') ? br : 1; u.uSB.value = (b === 'brain' || b === 'brainAI') ? br : 1;
     /* route the helix through the gap between the two text blocks (or under the slides), never across text */
     {
       const ca = u.uCA.value, cb = u.uCB.value, inCar = CAR_KEYS.indexOf(a) >= 0 && CAR_KEYS.indexOf(b) >= 0;
