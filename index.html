@@ -200,6 +200,7 @@ em{font-style:italic;color:#D8B66A}
 .care-h{color:#F4ECDE;margin:18px 0 0;font-size:clamp(52px,5.8vw,104px);line-height:1.04;letter-spacing:-.01em}
 .care-b{margin-top:30px;font-size:clamp(22px,1.65vw,28px);max-width:46ch}
 .care .after{margin-top:40px}
+.shape-slot{display:none}
 /* carousel */
 .orgs{display:flex;align-items:center;gap:20px;margin:0 0 18px}
 .org-wide{display:block;height:72px;width:auto}
@@ -265,12 +266,17 @@ em{font-style:italic;color:#D8B66A}
 .hero{align-items:flex-end;padding-bottom:12vh}
 .cue{left:22px}
 .story p.big{margin-bottom:10vh}
-.p-head,.proj{padding-top:44vh;align-items:flex-start}
-#taap{min-height:0;padding:64vh 0 8vh;display:block}
+.p-head,.proj{padding-top:12vh;align-items:flex-start}
+#taap{min-height:0;padding:12vh 0 8vh;display:block}
+.shape-slot{display:block;height:40vh;margin:8px 0 4px}
 .stats{gap:18px}
 #migrind{min-height:0;padding:0}
-.mg-in{min-height:0;display:flex;flex-direction:column-reverse;align-items:stretch;gap:5vh;padding:9vh 0 8vh}
-.mg-in .col{max-width:none}
+.mg-in{min-height:0;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:9vh 0 8vh}
+.mg-in .col{display:contents}
+.mg-in .col>*{order:1}
+.mg-in .phone-wrap{order:2;margin:34px 0 26px}
+.mg-in .col>.stats{order:3}
+.mg-in .col>.after{order:4}
 .phone{--ph:min(46vh,92vw)}
 .v-phone{--ph:min(74vh,calc(100vh - 170px))}
 .v-prev,.v-next{display:none !important}
@@ -291,7 +297,7 @@ em{font-style:italic;color:#D8B66A}
 .car-head{position:absolute;left:22px;top:120px;padding:0}
 .car-track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;height:auto}
 .car-track::-webkit-scrollbar{display:none}
-.slide,.slide.compact{flex:0 0 88vw;scroll-snap-align:start;padding:60vh 22px 8vh;align-items:flex-start;height:auto}
+.slide,.slide.compact{flex:0 0 88vw;scroll-snap-align:start;padding:250px 22px 8vh;align-items:flex-start;height:auto}
 .slide .sc,.slide.compact .sc{max-width:none}
 .ai{padding-top:44vh;margin-top:0}
 .ai .col{max-width:none}
@@ -393,7 +399,7 @@ em{font-style:italic;color:#D8B66A}
 <p class="lbl rv-fade">Project 01 · AI for athletes</p>
 <h3 class="p-title logo rv-fade"><img src="assets/img/migrind-logo.png" alt="miGRIND" width="342" height="72"></h3>
 <p class="rv tag serif"><span class="wm"><span class="w">An</span></span> <span class="wm"><span class="w">AI</span></span> <span class="wm"><span class="w">mentor</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">athletes</span></span> <span class="wm"><span class="w">who</span></span> <span class="wm"><span class="w"><em>can't</em></span></span> <span class="wm"><span class="w"><em>afford</em></span></span> <span class="wm"><span class="w"><em>a</em></span></span> <span class="wm"><span class="w"><em>prep</em></span></span> <span class="wm"><span class="w"><em>school.</em></span></span></p>
-<p class="rv body"><span class="wm"><span class="w">Personalized,</span></span> <span class="wm"><span class="w">self-adjusting</span></span> <span class="wm"><span class="w">plans</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">training,</span></span> <span class="wm"><span class="w">strength,</span></span> <span class="wm"><span class="w">nutrition,</span></span> <span class="wm"><span class="w">recovery</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">school,</span></span> <span class="wm"><span class="w">all</span></span> <span class="wm"><span class="w">backed</span></span> <span class="wm"><span class="w">by</span></span> <span class="wm"><span class="w">actual</span></span> <span class="wm"><span class="w">science.</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">designed</span></span> <span class="wm"><span class="w">it,</span></span> <span class="wm"><span class="w">priced</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">built</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">myself,</span></span> <span class="wm"><span class="w">web</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">iOS.</span></span></p>
+<p class="rv body"><span class="wm"><span class="w">Personalized,</span></span> <span class="wm"><span class="w">self-adjusting</span></span> <span class="wm"><span class="w">plans</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">training,</span></span> <span class="wm"><span class="w">strength,</span></span> <span class="wm"><span class="w">nutrition,</span></span> <span class="wm"><span class="w">recovery</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">school,</span></span> <span class="wm"><span class="w">all</span></span> <span class="wm"><span class="w">backed</span></span> <span class="wm"><span class="w">by</span></span> <span class="wm"><span class="w">actual</span></span> <span class="wm"><span class="w">science.</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">designed</span></span> <span class="wm"><span class="w">it,</span></span> <span class="wm"><span class="w">priced</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">built</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">myself.</span></span></p>
 <div class="stats count-row rv-row"><div class="stat"><span class="snum serif"><span class="cnt" data-to="50">50</span></span><span class="slab">users in the first two months</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="200">200</span>+</span><span class="slab">research papers</span></div><div class="stat"><span class="snum serif"><em class="serif" style="font-style:normal">iOS</em></span><span class="slab">launching soon</span></div></div>
 <div class="after rv-row"><a class="btn-gold" href="https://migrind.com" target="_blank" rel="noopener">Visit miGRIND<svg class="btn-ar" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
 </div>
@@ -406,6 +412,7 @@ em{font-style:italic;color:#D8B66A}
 <h3 class="rv p-title serif"><span class="wm"><span class="w">The</span></span> <span class="wm"><span class="w">Athlete</span></span> <span class="wm"><span class="w">Alliance</span></span> <span class="wm"><span class="w">Project</span></span></h3>
 <p class="rv tag serif"><span class="wm"><span class="w">Support</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">person</span></span> <span class="wm"><span class="w"><em>behind</em></span></span> <span class="wm"><span class="w"><em>the</em></span></span> <span class="wm"><span class="w"><em>athlete.</em></span></span></p>
 <p class="rv body"><span class="wm"><span class="w">A</span></span> <span class="wm"><span class="w">nonprofit</span></span> <span class="wm"><span class="w">that</span></span> <span class="wm"><span class="w">matches</span></span> <span class="wm"><span class="w">student-athletes</span></span> <span class="wm"><span class="w">with</span></span> <span class="wm"><span class="w">mental</span></span> <span class="wm"><span class="w">health</span></span> <span class="wm"><span class="w">mentors,</span></span> <span class="wm"><span class="w">on</span></span> <span class="wm"><span class="w">a</span></span> <span class="wm"><span class="w">platform</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">built.</span></span> <span class="wm"><span class="w">Because</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">hardest</span></span> <span class="wm"><span class="w">parts</span></span> <span class="wm"><span class="w">of</span></span> <span class="wm"><span class="w">being</span></span> <span class="wm"><span class="w">an</span></span> <span class="wm"><span class="w">athlete</span></span> <span class="wm"><span class="w">rarely</span></span> <span class="wm"><span class="w">show</span></span> <span class="wm"><span class="w">up</span></span> <span class="wm"><span class="w">on</span></span> <span class="wm"><span class="w">a</span></span> <span class="wm"><span class="w">stat</span></span> <span class="wm"><span class="w">sheet.</span></span></p>
+<div class="shape-slot" aria-hidden="true"></div>
 <div class="stats count-row rv-row"><div class="stat"><span class="snum serif"><span class="cnt" data-to="10">10</span></span><span class="slab">mentors</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="30">30</span>+</span><span class="slab">mentor-athlete conversations</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="1">1</span></span><span class="slab">Venture program launched</span></div></div>
 <div class="after rv-row"><a class="btn-gold" href="https://athleteallianceproject.com" target="_blank" rel="noopener">Visit TAAP<svg class="btn-ar" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
 </div>
@@ -425,6 +432,7 @@ em{font-style:italic;color:#D8B66A}
 <p class="role">Growth Strategy Intern · Sandbox Group · 2025</p>
 <h3 class="serif">My first look at where healthcare and <em>strategy meet.</em></h3>
 <p class="body">I worked on growth for a cognitive-training app built for elderly users with cognitive disorders, shaping the recommendations and running the channel tests behind these results.</p>
+<div class="shape-slot" aria-hidden="true"></div>
 <div class="stats"><div class="stat"><span class="snum serif">5x</span><span class="slab">user acquisition</span></div><div class="stat"><span class="snum serif">+10%</span><span class="slab">engagement time</span></div></div>
 </div>
 </article>
@@ -434,6 +442,7 @@ em{font-style:italic;color:#D8B66A}
 <p class="role">Student Researcher · Medicine4Youth · 2025</p>
 <h3 class="serif">A peer-reviewed review, <em>led start to finish.</em></h3>
 <p class="body">I led a team of five to write a peer-reviewed review on preventing depression in South Asian communities predisposed to obesity, turning public health, psychiatric and epidemiological research into recommendations for culturally sensitive care.</p>
+<div class="shape-slot" aria-hidden="true"></div>
 </div>
 </article>
 <article class="slide compact" id="coaching">
@@ -442,6 +451,7 @@ em{font-style:italic;color:#D8B66A}
 <p class="role">Head Coach · Red Rush Basketball · since 2025</p>
 <h3 class="serif">Game plans built on <em>film and stats.</em></h3>
 <p class="body">Now I'm head coach of a competitive travel team, breaking down film and stats to build game plans around what my players do best.</p>
+<div class="shape-slot" aria-hidden="true"></div>
 </div>
 </article>
 <article class="slide compact" id="training">
@@ -449,6 +459,7 @@ em{font-style:italic;color:#D8B66A}
 <p class="role">Private Trainer · since 2021</p>
 <h3 class="serif">One athlete, <em>one plan.</em></h3>
 <p class="body">It started with one athlete and one plan. I've been writing science-backed training plans grounded in exercise physiology ever since.</p>
+<div class="shape-slot" aria-hidden="true"></div>
 <div class="stats"><div class="stat"><span class="snum serif">15+</span><span class="slab">clients</span></div><div class="stat"><span class="snum serif">400+</span><span class="slab">hours of training</span></div></div>
 </div>
 </article>

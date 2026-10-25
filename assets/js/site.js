@@ -465,7 +465,7 @@ class Component extends DCLogic {
         const last = this.qa('.slide')[nS - 1], sc = last && last.querySelector('.sc');
         const scy = sc ? sc.offsetTop + sc.offsetHeight / 2 : vh * 0.5;
         add(e + Math.max(1, scy - 0.7 * vh), CAR_KEYS[nS - 1], ct);
-      } else if (ch) { add(enter(car), 'neuron', { car: true, track: T(car) }); }
+      } else if (ch) { add(enter(car), 'neuron', { car: true, track: T(car) }); add(Math.max(enter(car) + 2, B(car) - 0.75 * vh), 'neuron', { car: true, track: T(car) }); }
     }
     const ahead = this.q('#ai .h2'), acol = this.q('#ai .col');
     if (ahead && acol) hold(ahead, acol, 'brainAI');
@@ -1019,7 +1019,7 @@ class Component extends DCLogic {
     const S = this.stops || [{ k: 'brain', y: 0 }];
     const i0 = Math.max(0, Math.min(S.length - 1, Math.floor(m))), i1 = Math.min(S.length - 1, i0 + 1);
     let f = m - i0, a = S[i0].k, b = S[i1].k, sa = S[i0], sb = S[i1];
-    if (this.carIdx >= 0 && Math.abs(m - this.carIdx) < 0.02) {
+    if (this.carIdx >= 0 && (Math.abs(m - this.carIdx) < 0.02 || (S[i0].car && S[i1].car))) {
       const track = this.q('.car-track'), sl = this.qa('.slide');
       if (track && sl.length) {
         const w = sl[0].offsetWidth || 1, qv = Math.min(3, Math.max(0, track.scrollLeft / w));
@@ -1053,8 +1053,19 @@ class Component extends DCLogic {
       if (st.carTrack) { const cs = st.carTrack[0], ce = st.carTrack[1]; return (sy < cs ? sy - cs : (sy > ce ? sy - ce : 0)) / vh * 2 * H0; }
       return st.track != null ? (sy - st.track) / vh * 2 * H0 : 0;
     };
-    let offA = [oa[0] + offX(a), oa[1] + trk(sa), oa[2]];
-    const offB = [ob[0] + offX(b), ob[1] + trk(sb), ob[2]];
+    /* on phones the TAAP ball and each experience shape sit in a slot inside their own text column */
+    const slotDy = (k) => {
+      if (!this.mob || !this.shapes[k]) return null;
+      let el = null;
+      if (k === 'ball') el = this.q('#taap .shape-slot');
+      else { const ix = CAR_KEYS.indexOf(k); if (ix >= 0 && sl[ix]) el = sl[ix].querySelector('.shape-slot'); }
+      if (!el) return null;
+      const r = el.getBoundingClientRect(), shapeY = (1 - this.shapes[k].c[1] / H0) / 2 * vh;
+      return -((r.top + r.height / 2) - shapeY) / vh * 2 * H0;
+    };
+    const ya = slotDy(a), yb = slotDy(b);
+    let offA = [oa[0] + offX(a), oa[1] + (ya != null ? ya : trk(sa)), oa[2]];
+    const offB = [ob[0] + offX(b), ob[1] + (yb != null ? yb : trk(sb)), ob[2]];
     if (same) offA = [lerp(offA[0], offB[0], f), lerp(offA[1], offB[1], f), lerp(offA[2], offB[2], f)];
     u.uOffA.value.set(offA[0], offA[1], offA[2]);
     if (same) u.uOffB.value.copy(u.uOffA.value); else u.uOffB.value.set(offB[0], offB[1], offB[2]);
