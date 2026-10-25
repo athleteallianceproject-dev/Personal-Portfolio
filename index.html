@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arjun Bhardwaj</title>
+<meta name="description" content="Medical Sciences student at Western building AI for sport and health. Founder of miGRIND and The Athlete Alliance Project.">
+<meta property="og:title" content="Arjun Bhardwaj">
+<meta property="og:description" content="Medical Sciences student at Western building AI for sport and health. Founder of miGRIND and The Athlete Alliance Project.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Arjun Bhardwaj">
+<meta name="twitter:image" content="assets/img/og-image.jpg">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#030B1E}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-stopped{overflow:hidden}
+html:has(.fm-root.loading){overflow:hidden}
+.fm-root{--ink:rgba(244,236,222,.85);--gold:#D8B66A;font-family:Inter,system-ui,sans-serif;color:#F4ECDE;background:#030B1E;-webkit-font-smoothing:antialiased;position:relative;overflow-x:clip}
+.fm-root *{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+.fm-root ::selection{background:#D8B66A;color:#06122A}
+.serif{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-optical-sizing:auto;font-weight:400}
+.script{font-family:Allura,cursive;font-weight:400}
+em{font-style:italic;color:#D8B66A}
+.lbl{margin:0;font-size:clamp(14px,1.02vw,17px);letter-spacing:.18em;text-transform:uppercase;color:#D8B66A;font-weight:500;opacity:1}
+.role{margin:0;font-size:clamp(16px,1.15vw,19px);letter-spacing:.12em;color:#D8B66A;font-weight:500;line-height:1.45}
+.wm{display:inline-block;overflow:hidden;vertical-align:top;padding:.2em .08em .3em;margin:-.2em -.08em -.3em}
+.script .wm,.wm.sc{padding:.42em .34em .5em;margin:-.42em -.34em -.5em}
+.w{display:inline-block;will-change:transform}
+.body{margin:18px 0 0;font-size:clamp(20px,1.46vw,24px);line-height:1.6;color:rgba(244,236,222,.85);max-width:60ch}
+.tlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:#F4ECDE;font-size:17px;font-weight:500;background-image:linear-gradient(#D8B66A,#D8B66A);background-repeat:no-repeat;background-size:100% 1px;background-position:0 calc(100% - 10px);transition:color .25s,background-size .35s}
+.tlink:hover{color:#D8B66A;background-size:35% 1px}
+.slot{border:1px dashed rgba(216,182,106,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ink);font-size:12px;text-align:center;aspect-ratio:16 / 10;width:min(280px,100%)}
+.slot b{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#D8B66A;font-weight:600}
+
+/* fixed layers */
+.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;display:none;animation:drift 38s ease-in-out infinite alternate}
+.js-on .glow{display:block}
+.g1{width:80vw;height:80vw;left:-20vw;top:-25vw;background:radial-gradient(closest-side,rgba(38,72,170,.2),transparent)}
+.g2{width:60vw;height:60vw;right:-14vw;top:30vh;background:radial-gradient(closest-side,rgba(24,120,132,.08),transparent);animation-duration:46s}
+.g3{width:55vw;height:55vw;left:28vw;bottom:-30vw;background:radial-gradient(closest-side,rgba(216,182,106,.06),transparent);animation-duration:54s}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6vw,-5vh,0) scale(1.08)}100%{transform:translate3d(-5vw,6vh,0) scale(.95)}}
+.field{position:fixed;inset:0;width:100%;height:100%;z-index:1;display:none;pointer-events:none}
+.js-on .field{display:block}
+.vign{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 58%,rgba(2,8,26,.7) 100%);display:none}
+.js-on .vign{display:block}
+.grain{position:fixed;inset:-60%;z-index:3;pointer-events:none;background-image:url(assets/img/grain.png);background-size:220px 220px;opacity:.13;animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-5%)}75%{transform:translate(-2%,6%)}100%{transform:translate(0,0)}}
+.hdr{position:fixed;left:0;right:0;top:0;height:160px;z-index:18;pointer-events:none;background:linear-gradient(180deg,#030B1E 0%,#030B1E 48%,rgba(3,11,30,.85) 68%,rgba(3,11,30,0) 100%)}
+.mono{position:fixed;top:32px;left:36px;z-index:20;line-height:1;height:68px;display:flex;align-items:center}
+.mono img{display:block;height:68px;width:auto}
+.menu-btn{position:fixed;top:44px;right:30px;z-index:31;min-height:44px;padding:0 6px;background:none;border:0;color:#F4ECDE;font:500 12px Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px}
+.menu-btn i{display:block;width:22px;height:7px;border-top:1px solid #D8B66A;border-bottom:1px solid #D8B66A;transition:transform .35s}
+.menu-open .menu-btn i{transform:scaleX(.55)}
+.menu{position:fixed;inset:0;z-index:30;background:radial-gradient(90% 80% at 85% 20%,rgba(38,72,170,.22),transparent 60%),rgba(2,8,26,.97);display:flex;align-items:center;padding:150px 8vw 56px;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;overflow-y:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.menu-open .menu{opacity:1;visibility:visible}
+.m-in{width:100%;max-width:1240px;margin:auto 0;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.75fr);gap:6vw;align-items:end}
+.m-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(216,182,106,.22)}
+.m-item{border-bottom:1px solid rgba(216,182,106,.22);padding:14px 0;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.menu-open .m-item{opacity:1;transform:none}
+.menu-open .m-item:nth-child(1){transition-delay:.06s}.menu-open .m-item:nth-child(2){transition-delay:.11s}.menu-open .m-item:nth-child(3){transition-delay:.16s}.menu-open .m-item:nth-child(4){transition-delay:.21s}.menu-open .m-item:nth-child(5){transition-delay:.26s}.menu-open .m-item:nth-child(6){transition-delay:.31s}
+.m-main{display:flex;align-items:baseline;gap:22px;font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(30px,3.3vw,52px);line-height:1.1;color:#F4ECDE;min-height:44px;transition:color .25s}
+.m-main small{flex:none;width:30px;font:500 14px Inter,sans-serif;letter-spacing:.18em;color:#D8B66A}
+.m-main span{transition:transform .35s cubic-bezier(.3,.7,.2,1)}
+.m-main:hover{color:#D8B66A}.m-main:hover span{transform:translateX(10px)}
+.m-subs{display:flex;flex-wrap:wrap;gap:4px 26px;margin:6px 0 2px 52px}
+.m-subs a{font:500 14px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,222,.7);min-height:32px;display:inline-flex;align-items:center;transition:color .25s}
+.m-subs a:hover{color:#D8B66A}
+.m-side{opacity:0;transform:translateY(18px);transition:opacity .6s .35s,transform .7s .35s cubic-bezier(.2,.7,.2,1);padding-bottom:16px}
+.menu-open .m-side{opacity:1;transform:none}
+.m-name{margin:0;font-size:clamp(48px,4.4vw,72px);line-height:1;color:#F4ECDE}
+.m-meta{margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(244,236,222,.75)}
+.m-links{display:flex;flex-direction:column;gap:6px;margin-top:28px}
+.m-links a{align-self:flex-start;font-family:Fraunces,Georgia,serif;font-size:24px;color:#F4ECDE;min-height:40px;display:inline-flex;align-items:center;background-image:linear-gradient(#D8B66A,#D8B66A);background-repeat:no-repeat;background-size:0 1px;background-position:0 90%;transition:background-size .35s,color .25s}
+.m-links a:hover{color:#D8B66A;background-size:100% 1px}
+.menu-open .mono{z-index:32}
+.menu-open .hdr{z-index:31}
+.menu-btn:focus{outline:none}.menu-btn:focus-visible{outline:2px solid #D8B66A;outline-offset:4px}
+.loader{display:none}
+.js-on.loading .loader{display:flex;position:fixed;left:0;right:0;bottom:10vh;z-index:40;justify-content:center;pointer-events:none}
+.ld-num{margin:0;font-size:26px;text-align:center}
+.ld-num span{display:inline-block;min-width:2.2ch;text-align:right}
+.ld-cap{margin:8px 0 0;font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:#D8B66A;text-align:center}
+.js-on.loading .page,.js-on.loading .mono,.js-on.loading .menu-btn{opacity:0}
+.page,.mono,.menu-btn{transition:opacity .8s ease}
+
+/* sections */
+.page{position:relative;z-index:5}
+.js-on .page{text-shadow:0 0 26px rgba(3,11,30,.95),0 0 3px rgba(3,11,30,.8)}
+.sec{position:relative;padding:0 8vw}
+.col{max-width:min(620px,42vw)}
+.col.r{margin-left:auto}
+.hero{min-height:min(100vh,1000px);display:flex;align-items:center;padding-top:96px;padding-bottom:6vh}
+.name{margin:0;font-size:clamp(78px,9vw,160px);line-height:1.05;color:#F4ECDE}
+.stmt{margin:14px 0 0;font-size:clamp(28px,2.7vw,46px);line-height:1.16;max-width:16ch}
+.hero .small{margin:22px 0 0;font-size:clamp(18px,1.3vw,21px);line-height:1.55;color:rgba(244,236,222,.85);max-width:520px}
+.cue{position:absolute;left:8vw;bottom:4vh;display:flex;align-items:center;gap:14px;font-size:14px;letter-spacing:.32em;text-transform:uppercase;color:#D8B66A}
+.cue i{display:block;width:44px;height:1px;background:linear-gradient(90deg,#D8B66A,#D8B66A) 0 0/40% 1px no-repeat,rgba(216,182,106,.25);animation:cue 2.2s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes cue{0%{background-position:-20px 0}100%{background-position:60px 0}}
+.story{padding-top:4vh;padding-bottom:10vh}
+.story .col{max-width:min(820px,60vw)}
+.story p.big{margin:0 0 6vh;font-size:clamp(28px,3vw,48px);line-height:1.26}
+.building{height:100vh;display:flex;align-items:center;justify-content:center;padding:0 6vw}
+.bfall{margin:0;font-family:Allura,cursive;font-size:clamp(64px,10vw,170px);line-height:1.2;color:#D8B66A;text-align:center}
+.gl-on .bfall{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.h2{margin:10px 0 0;font-size:clamp(42px,4.8vw,80px);line-height:1.04;letter-spacing:-.01em}
+.p-head{min-height:80vh;display:flex;align-items:center;padding-top:80px}
+.proj{min-height:100vh;display:flex;align-items:center;padding:12vh 0}
+.p-title{margin:12px 0 0;font-size:clamp(50px,5.6vw,96px);line-height:1;letter-spacing:-.02em}
+.p-title b{font-weight:650}
+.tag{margin:18px 0 0;font-size:clamp(28px,2.1vw,36px);line-height:1.2}
+.stats{display:flex;flex-wrap:nowrap;gap:34px;margin-top:30px}
+.stat{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 0}
+.snum{font-size:clamp(40px,3.8vw,64px);line-height:1;color:#D8B66A;letter-spacing:-.02em;white-space:nowrap}
+.slab{font-size:clamp(14px,1vw,16px);letter-spacing:.1em;text-transform:uppercase;color:rgba(244,236,222,.75);line-height:1.4;max-width:15ch}
+.after{display:flex;align-items:center;gap:30px;margin-top:26px;flex-wrap:wrap}
+#taap{min-height:0;display:flex;align-items:center;padding:146px 0 48px}
+#taap .tlogo{height:56px;margin-bottom:12px}
+#taap .p-title{font-size:clamp(44px,4.3vw,72px);margin-top:8px}
+#taap .tag{margin-top:10px}
+#taap .body{margin-top:12px}
+#taap .stats{margin-top:20px}
+#taap .after{margin-top:24px}
+#migrind{min-height:0;display:block;padding:0}
+.mg-in{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);align-items:center;gap:3vw;padding:146px 0 48px}
+#migrind .tag{margin-top:12px}
+#migrind .body{margin-top:12px}
+#migrind .stats{margin-top:20px}
+#migrind .after{margin-top:24px}
+.mg-in .col{transition:none}
+.mg-in .col{max-width:min(600px,42vw)}
+.p-title.logo{margin:14px 0 0;line-height:0}
+.p-title.logo img{display:block;height:clamp(60px,5vw,80px);width:auto}
+.tlogo{display:block;height:56px;width:auto;margin:0 0 16px}
+.phone-wrap .phone{cursor:zoom-in;transition:transform .35s cubic-bezier(.3,.7,.2,1)}
+.phone-wrap .phone:hover{transform:translateY(-4px)}
+.phone-wrap{margin:0;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:18px}
+.view-btn{position:relative;background:none;border:0;padding:8px 2px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font:500 20px Inter,sans-serif;letter-spacing:.01em;color:#F0CF83;min-height:44px;text-shadow:0 0 14px rgba(240,207,131,.35);animation:vglow 3.2s ease-in-out infinite}
+.view-btn svg{flex:none;filter:drop-shadow(0 0 6px rgba(240,207,131,.5))}
+.view-btn .vt{position:relative;background:linear-gradient(100deg,#F0CF83 0%,#F0CF83 40%,#FFF6DE 50%,#F0CF83 60%,#F0CF83 100%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:vshine 4.5s ease-in-out infinite}
+.view-btn .vt::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:#F0CF83;transform:scaleX(.45);transform-origin:left;transition:transform .35s cubic-bezier(.3,.7,.2,1),height .35s}
+.view-btn:hover .vt::after{transform:scaleX(1);height:2px}
+.view-btn:hover{text-shadow:0 0 22px rgba(240,207,131,.7)}
+.view-btn:focus-visible{outline:2px solid #F4ECDE;outline-offset:4px}
+@keyframes vglow{0%,100%{text-shadow:0 0 10px rgba(240,207,131,.25)}50%{text-shadow:0 0 22px rgba(240,207,131,.6)}}
+@keyframes vshine{0%,55%{background-position:100% 0}100%{background-position:-50% 0}}
+.phone{--ph:min(62vh,calc(100vh - 320px));position:relative;display:block;width:fit-content;height:var(--ph);padding:calc(var(--ph) * .016);border-radius:calc(var(--ph) * .074);background:linear-gradient(145deg,#2a3247,#0d1222 55%,#1d2436);box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 0 2px rgba(3,11,30,.9),0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(216,182,106,.12)}
+.screen{position:relative;height:100%;aspect-ratio:1206 / 2622;border-radius:calc(var(--ph) * .06);overflow:hidden;background:#06122A}
+.strip{display:flex;width:100%;height:100%;will-change:transform}
+.scr{position:relative;flex:0 0 100%;height:100%;overflow:hidden}
+.scr img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.strip{transition:transform .55s cubic-bezier(.3,.7,.2,1)}
+.scr.ph{display:flex;align-items:flex-end;justify-content:center;padding-bottom:22%;background:radial-gradient(120% 70% at 50% 20%,#13284A,#06122A)}
+.scr.ph span{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#D8B66A}
+.island{position:absolute;top:1.4%;left:50%;width:30%;height:3.2%;transform:translateX(-50%);border-radius:99px;background:#000}
+.scr-cap{font-size:14px;letter-spacing:.24em;color:var(--ink)}
+.scr-n{color:#D8B66A}
+.rlabel{position:fixed;left:0;top:0;z-index:4;pointer-events:none;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:#D8B66A;opacity:0;white-space:nowrap;display:none}
+.gl-on .rlabel{display:none}
+.rglow{position:fixed;left:0;top:0;width:460px;height:460px;border-radius:50%;z-index:1;pointer-events:none;opacity:0;display:none;background:radial-gradient(closest-side,rgba(216,182,106,.22),rgba(216,182,106,.07) 55%,transparent);mix-blend-mode:screen}
+.gl-on .rglow{display:block}
+.rlabel::before{content:"";display:inline-block;width:28px;height:1px;background:#D8B66A;vertical-align:middle;margin-right:12px;opacity:.7}
+/* app viewer */
+.viewer{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:rgba(3,11,30,.74);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.viewer-open .viewer{opacity:1;visibility:visible}
+.v-stage{display:flex;flex-direction:column;align-items:center;gap:16px}
+.v-phone{--ph:min(80vh,calc(100vh - 150px))}
+.v-count{margin:0;font-size:15px;letter-spacing:.24em;color:rgba(244,236,222,.85)}
+.v-count span{color:#D8B66A}
+.viewer button{position:absolute;background:rgba(3,11,30,.5);border:1px solid rgba(216,182,106,.5);color:#F4ECDE;width:52px;height:52px;border-radius:50%;cursor:pointer;font:300 26px/1 Inter,sans-serif;display:flex;align-items:center;justify-content:center}
+.viewer button:hover{border-color:#D8B66A;color:#D8B66A}
+.v-close{top:32px;right:32px}
+.v-prev{left:max(24px,calc(50% - var(--vw,240px) - 110px));top:50%;transform:translateY(-50%)}
+.v-next{right:max(24px,calc(50% - var(--vw,240px) - 110px));top:50%;transform:translateY(-50%)}
+.viewer button[disabled]{opacity:.3;cursor:default}
+/* gold buttons */
+.btn-gold{display:inline-flex;align-items:center;gap:12px;background:#D8B66A;color:#06122A;font:600 17px/1 Inter,sans-serif;letter-spacing:.02em;padding:16px 28px;border-radius:0;text-decoration:none;text-shadow:none;transition:box-shadow .3s,background .3s}
+.btn-gold .btn-ar{transition:transform .3s cubic-bezier(.3,.7,.2,1)}
+.btn-gold:hover{background:#E2C27A;box-shadow:0 0 0 1px rgba(216,182,106,.4),0 0 34px rgba(216,182,106,.45)}
+.btn-gold:hover .btn-ar{transform:translateX(5px)}
+.btn-gold:focus-visible{outline:2px solid #F4ECDE;outline-offset:3px}
+/* ai list */
+.ai-list{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid rgba(216,182,106,.2)}
+.ai-list li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:20px;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(216,182,106,.2)}
+.ai-list b{font:500 14px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#D8B66A}
+.ai-list span{font-size:clamp(18px,1.3vw,21px);line-height:1.5;color:rgba(244,236,222,.85)}
+.ai-close{margin:22px 0 0;font-size:clamp(18px,1.3vw,21px);line-height:1.55;color:rgba(244,236,222,.85)}
+/* healthcare */
+.care-eye{margin:0;font-size:clamp(26px,2.2vw,36px);line-height:1.1;letter-spacing:.01em;text-shadow:0 0 22px rgba(216,182,106,.35)}
+.care{min-height:0;display:flex;align-items:center;padding:10vh 8vw 18vh}
+.care-in{max-width:min(980px,70vw)}
+.care-h{color:#F4ECDE;margin:18px 0 0;font-size:clamp(52px,5.8vw,104px);line-height:1.04;letter-spacing:-.01em}
+.care-b{margin-top:30px;font-size:clamp(22px,1.65vw,28px);max-width:46ch}
+.care .after{margin-top:40px}
+/* carousel */
+.orgs{display:flex;align-items:center;gap:20px;margin:0 0 18px}
+.org-wide{display:block;height:72px;width:auto}
+.org-ico{display:block;width:72px;height:72px;border-radius:16px;box-shadow:0 0 0 1px rgba(244,236,222,.16)}
+.slide h3{margin-top:10px}
+.learned{padding:0}
+.car{position:relative;height:100vh;overflow:hidden}
+.car-head{position:absolute;left:8vw;top:150px;z-index:2}
+.car-track{display:flex;height:100%;will-change:transform}
+.slide{flex:0 0 100vw;height:100%;display:flex;align-items:flex-start;padding:262px 8vw 5vh}
+#training{align-items:center;padding-top:200px}
+.slide .stats{gap:72px}
+.slide .stat{flex:0 0 auto}
+.slide .slab{max-width:none;white-space:nowrap}
+.slide.compact{flex-basis:100vw}
+.slide .sc{max-width:min(600px,42vw)}
+.slide.compact .sc{max-width:min(600px,42vw)}
+.slide h3{margin:12px 0 0;font-size:clamp(30px,3vw,50px);line-height:1.08}
+.slide .stats{margin-top:22px}
+.ai{padding-top:16vh;padding-bottom:4vh;margin-top:0}
+.ai .h2{font-size:clamp(40px,4vw,68px)}
+.ai .lead{margin:10px 0 0;font-size:clamp(26px,2.3vw,40px);line-height:1.14}
+.ai-item{margin-top:3vh}
+.ai-item .body{margin-top:10px;font-size:clamp(18px,1.3vw,21px);line-height:1.55}
+.ai .col{max-width:min(680px,46vw)}
+/* finale */
+.finale{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:150px;padding-bottom:40px;background:radial-gradient(60% 50% at 25% 45%,rgba(216,182,106,.07),transparent 70%)}
+.fin-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:5vw;align-items:center;width:100%;max-width:1280px;margin:0 auto}
+.fin-copy{max-width:640px}
+.shot-cap{margin:22px 0 0;text-align:center;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:#D8B66A}
+.fin-b{margin-top:18px;max-width:46ch}
+.fcards{display:flex;flex-direction:column;margin-top:34px;max-width:620px;border-top:1px solid rgba(216,182,106,.28)}
+.fcard{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr) 24px;align-items:center;gap:16px;padding:18px 6px;border-bottom:1px solid rgba(216,182,106,.28);color:#F4ECDE;text-decoration:none;transition:background .3s,padding .3s}
+.fcard .fk{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(24px,1.8vw,30px);line-height:1.1}
+.fcard .fv{font-size:16px;color:rgba(244,236,222,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fcard svg{color:#D8B66A;transition:transform .3s}
+.fcard:hover,.fcard:focus-visible{background:linear-gradient(90deg,rgba(216,182,106,.1),transparent);padding-left:14px}
+.fcard:hover .fk{color:#D8B66A}
+.fcard:hover svg{transform:translateX(5px)}
+.fbar{display:flex;align-items:center;gap:24px;margin-top:8vh;padding-top:22px;border-top:1px solid rgba(216,182,106,.22)}
+.fbar-logo{height:32px;width:auto}
+.fbar-txt{margin:0;flex:1;font-size:14px;letter-spacing:.06em;color:rgba(244,236,222,.7)}
+.fbar-txt i{color:#D8B66A;font-style:normal;padding:0 6px}
+.fbar-top{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#D8B66A;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.fbar-top:hover{color:#F4ECDE}
+.shot{position:relative;width:min(380px,30vw);justify-self:center}
+.arch{position:relative;aspect-ratio:4 / 5;border-radius:999px 999px 4px 4px;overflow:hidden;background:#13284A}
+.arch img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:saturate(.8) contrast(1.05) brightness(.95)}
+.arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,70,.18),rgba(3,11,30,.55));mix-blend-mode:multiply}
+.arch-line{position:absolute;inset:-12px;border:1px solid rgba(216,182,106,.7);border-radius:999px 999px 8px 8px;pointer-events:none}
+.gl-on .arch-line{border-color:rgba(216,182,106,.12)}
+.fname{margin:0;font-size:clamp(72px,7.6vw,140px);line-height:1.05;color:#F4ECDE}
+.fline{color:#F4ECDE;margin:6px 0 0;font-size:clamp(28px,2.6vw,44px);line-height:1.2}
+.flinks{display:flex;flex-wrap:wrap;gap:8px 44px;margin-top:34px}
+.flinks a{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(32px,2.8vw,46px);color:#F4ECDE;min-height:56px;display:inline-flex;align-items:center;background-image:linear-gradient(#D8B66A,#D8B66A);background-repeat:no-repeat;background-size:0% 1px;background-position:0 calc(100% - 6px);transition:background-size .45s cubic-bezier(.2,.8,.2,1),color .3s}
+.flinks a:hover,.flinks a:focus-visible{background-size:100% 1px;color:#D8B66A}
+.attr{margin:16px 0 0;font-size:12px;line-height:1.5;color:rgba(244,236,222,.5);max-width:640px}
+@media (max-width:820px){
+.care{min-height:100vh;padding:18vh 22px 34vh}
+.care-in{max-width:none}
+.sec{padding:0 22px}
+.col,.col.r,.story .col{max-width:none;margin-left:0}
+.hero{align-items:flex-end;padding-bottom:12vh}
+.cue{left:22px}
+.story p.big{margin-bottom:10vh}
+.p-head,.proj{padding-top:44vh;align-items:flex-start}
+#taap{min-height:0;padding:64vh 0 8vh;display:block}
+.stats{gap:18px}
+#migrind{min-height:0;padding:0}
+.mg-in{min-height:0;display:flex;flex-direction:column-reverse;align-items:stretch;gap:5vh;padding:9vh 0 8vh}
+.mg-in .col{max-width:none}
+.phone{--ph:min(46vh,92vw)}
+.v-phone{--ph:min(74vh,calc(100vh - 170px))}
+.v-prev,.v-next{display:none !important}
+.v-close{top:18px;right:16px}
+.org-wide{height:56px}
+.org-ico{width:56px;height:56px}
+.mono{top:20px;left:22px;height:52px}
+.mono img{height:52px}
+.menu-btn{top:24px;right:16px;font-size:15px}
+.hdr{height:120px}
+.lbl,.cue,.scr-cap,.ld-cap,.tlink,.rlabel,.attr{font-size:15px}
+.role{font-size:16px}
+.body,.hero .small{font-size:18px}
+.slab{font-size:13px}
+.story p.big{margin-bottom:5vh}
+
+.car{height:auto;overflow:visible}
+.car-head{position:absolute;left:22px;top:120px;padding:0}
+.car-track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;height:auto}
+.car-track::-webkit-scrollbar{display:none}
+.slide,.slide.compact{flex:0 0 88vw;scroll-snap-align:start;padding:60vh 22px 8vh;align-items:flex-start;height:auto}
+.slide .sc,.slide.compact .sc{max-width:none}
+.ai{padding-top:44vh;margin-top:0}
+.ai .col{max-width:none}
+.ai-list li{grid-template-columns:minmax(0,1fr);gap:4px}
+.ai-list span,.ai-close{font-size:17px}
+.finale{padding-top:110px}
+.fin-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+.fcard{grid-template-columns:96px minmax(0,1fr) 20px;padding:16px 2px}
+.slide{min-width:0;overflow:hidden}
+.slide .sc{min-width:0;width:100%}
+.slide .stats{gap:28px}
+.slide .slab{white-space:normal}
+.slide h3{overflow-wrap:break-word}
+.fcard .fv{font-size:14px}
+.fbar{flex-wrap:wrap;gap:12px 18px}
+.fbar-txt{flex:1 1 100%;order:3;font-size:13px}
+.fbar-top{margin-left:auto}
+.finale .attr{font-size:12px}
+.shot{width:min(240px,62vw);justify-self:start}
+.menu{padding:110px 22px 40px;align-items:flex-start}
+.m-in{grid-template-columns:minmax(0,1fr);gap:36px}
+.m-item{padding:10px 0}
+.m-main{font-size:30px;gap:14px}
+.m-main small{width:26px;font-size:13px}
+.m-subs{margin-left:40px;gap:0 18px}
+.m-subs a{font-size:13px;letter-spacing:.1em}
+.m-name{font-size:48px}
+.m-meta{font-size:15px}
+.m-links{flex-direction:row;flex-wrap:wrap;gap:4px 22px;margin-top:16px}
+.m-links a{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){.grain,.cue i,.glow,.view-btn,.view-btn .vt{animation:none}}
+</style>
+</head>
+<body>
+<div class="fm-root">
+<div class="glow g1" aria-hidden="true"></div><div class="glow g2" aria-hidden="true"></div><div class="glow g3" aria-hidden="true"></div>
+<canvas class="field" aria-hidden="true"></canvas>
+<div class="vign" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="hdr" aria-hidden="true"></div>
+<div class="viewer" role="dialog" aria-modal="true" aria-label="miGRIND app screens" aria-hidden="true"><button type="button" class="v-close" aria-label="Close">&#215;</button><button type="button" class="v-prev" aria-label="Previous screen">&#8249;</button><button type="button" class="v-next" aria-label="Next screen">&#8250;</button><div class="v-stage"><div class="phone v-phone"><div class="screen"><div class="strip"><div class="scr" data-i="0"><img src="assets/img/migrind-1-mentor-today.jpg" alt="miGRIND app screen: Mentor today" loading="lazy"></div><div class="scr" data-i="1"><img src="assets/img/migrind-3-goals.jpg" alt="miGRIND app screen: Goals" loading="lazy"></div><div class="scr" data-i="2"><img src="assets/img/migrind-4-strength-plan.jpg" alt="miGRIND app screen: Strength plan" loading="lazy"></div><div class="scr" data-i="3"><img src="assets/img/migrind-2-progress.jpg" alt="miGRIND app screen: Progress" loading="lazy"></div><div class="scr" data-i="4"><img src="assets/img/migrind-5-daily-schedule.jpg" alt="miGRIND app screen: Daily schedule" loading="lazy"></div></div><i class="island" aria-hidden="true"></i></div></div><p class="v-count"><span class="v-n">01</span> / 05</p></div></div>
+<div class="rglow" aria-hidden="true"></div>
+<div class="rlabel" aria-hidden="true"></div>
+<div class="loader" role="status" aria-live="polite"><div><p class="ld-num serif"><span class="ld-n">0</span>%</p><p class="ld-cap">loading my mind</p></div></div>
+<a href="#top" class="mono" data-go="top" aria-label="Arjun Bhardwaj, back to top"><img src="assets/img/logo.png" alt="" width="62" height="45"></a>
+<button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<i aria-hidden="true"></i></button>
+<nav class="menu" id="site-menu" aria-label="Sections">
+<div class="m-in">
+<ol class="m-list">
+<li class="m-item"><a class="m-main" href="#story" data-go="story"><small>01</small><span>Story</span></a></li>
+<li class="m-item"><a class="m-main" href="#migrind" data-go="migrind"><small>02</small><span>Projects</span></a>
+<div class="m-subs"><a href="#migrind" data-go="migrind">miGRIND</a><a href="#taap" data-go="taap">The Athlete Alliance Project</a></div></li>
+<li class="m-item"><a class="m-main" href="#learned" data-go="learned" data-slide="0"><small>03</small><span>Where <em>I learned</em></span></a>
+<div class="m-subs"><a href="#learned" data-go="learned" data-slide="0">Sandbox Group</a><a href="#learned" data-go="learned" data-slide="1">Medicine4Youth</a><a href="#learned" data-go="learned" data-slide="2">Red Rush</a><a href="#learned" data-go="learned" data-slide="3">Private training</a></div></li>
+<li class="m-item"><a class="m-main" href="#ai" data-go="ai"><small>04</small><span>How <em>I use AI</em></span></a></li>
+<li class="m-item"><a class="m-main" href="#care" data-go="care"><small>05</small><span>What's next</span></a></li>
+<li class="m-item"><a class="m-main" href="#contact" data-go="contact"><small>06</small><span>Contact</span></a></li>
+</ol>
+<aside class="m-side">
+<p class="m-name script">Arjun Bhardwaj</p>
+<p class="m-meta">Medical Sciences, Western University<br>Toronto, Ontario</p>
+<div class="m-links">
+<a href="mailto:abhard56@uwo.ca">Email</a>
+<a href="https://linkedin.com/in/arjun-bhardwaj-migrind" target="_blank" rel="noopener">LinkedIn</a>
+<a href="assets/Arjun-Bhardwaj-Resume.pdf" class="resume-link" target="_blank" rel="noopener" download="Arjun-Bhardwaj-Resume.pdf">Resume</a>
+</div>
+</aside>
+</div>
+</nav>
+
+<main class="page" id="top">
+
+<section class="sec hero" id="hero" aria-label="Introduction">
+<div class="col hero-in">
+<h1 class="name script">Arjun Bhardwaj</h1>
+<p class="stmt serif"><span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">build</span></span> <span class="wm"><span class="w">things</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">communities</span></span> <span class="wm"><span class="w">that</span></span> <span class="wm"><span class="w"><em>shaped</em></span></span> <span class="wm"><span class="w"><em>my</em></span></span> <span class="wm"><span class="w"><em>life.</em></span></span></p>
+<p class="small">Medical Sciences student at Western University.<br>Founder of miGRIND and The Athlete Alliance Project.</p>
+</div>
+<div class="cue" aria-hidden="true"><i></i>Scroll</div>
+</section>
+
+<section class="sec story" id="story" aria-label="Story">
+<div class="col">
+<p class="rv big serif"><span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">came</span></span> <span class="wm"><span class="w">to</span></span> <span class="wm"><span class="w">science</span></span> <span class="wm"><span class="w">through</span></span> <span class="wm"><span class="w">my</span></span> <span class="wm"><span class="w">love</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">basketball.</span></span> <span class="wm"><span class="w">Years</span></span> <span class="wm"><span class="w">of</span></span> <span class="wm"><span class="w">training</span></span> <span class="wm"><span class="w">made</span></span> <span class="wm"><span class="w">me</span></span> <span class="wm"><span class="w">curious</span></span> <span class="wm"><span class="w">about</span></span> <span class="wm"><span class="w"><em>how,</em></span></span> <span class="wm"><span class="w"><em>and</em></span></span> <span class="wm"><span class="w"><em>why,</em></span></span> <span class="wm"><span class="w">bodies</span></span> <span class="wm"><span class="w">respond</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">way</span></span> <span class="wm"><span class="w">they</span></span> <span class="wm"><span class="w">do,</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">over</span></span> <span class="wm"><span class="w">time,</span></span> <span class="wm"><span class="w">that</span></span> <span class="wm"><span class="w">curiosity</span></span> <span class="wm"><span class="w">brought</span></span> <span class="wm"><span class="w">me</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">answers.</span></span></p>
+<p class="rv big serif"><span class="wm"><span class="w">Today,</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">work</span></span> <span class="wm"><span class="w">where</span></span> <span class="wm"><span class="w">science,</span></span> <span class="wm"><span class="w">healthcare</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">sport</span></span> <span class="wm"><span class="w">overlap,</span></span> <span class="wm"><span class="w">with</span></span> <span class="wm"><span class="w">a</span></span> <span class="wm"><span class="w">mission</span></span> <span class="wm"><span class="w">to</span></span> <span class="wm"><span class="w">use</span></span> <span class="wm"><span class="w">my</span></span> <span class="wm"><span class="w">passions</span></span> <span class="wm"><span class="w">to</span></span> <span class="wm"><span class="w"><em>leave</em></span></span> <span class="wm"><span class="w"><em>a</em></span></span> <span class="wm"><span class="w"><em>lasting</em></span></span> <span class="wm"><span class="w"><em>impact</em></span></span> <span class="wm"><span class="w"><em>on</em></span></span> <span class="wm"><span class="w"><em>the</em></span></span> <span class="wm"><span class="w"><em>communities</em></span></span> <span class="wm"><span class="w"><em>that</em></span></span> <span class="wm"><span class="w"><em>shaped</em></span></span> <span class="wm"><span class="w"><em>me.</em></span></span></p>
+</div>
+</section>
+
+
+<section class="building" id="building" aria-label="So I started building">
+<p class="bfall">So I started building...</p>
+</section>
+
+<section class="sec projects" id="projects" aria-label="Projects">
+<div class="proj" id="migrind">
+<div class="mg-in">
+<div class="col">
+<p class="lbl rv-fade">Project 01 · AI for athletes</p>
+<h3 class="p-title logo rv-fade"><img src="assets/img/migrind-logo.png" alt="miGRIND" width="342" height="72"></h3>
+<p class="rv tag serif"><span class="wm"><span class="w">An</span></span> <span class="wm"><span class="w">AI</span></span> <span class="wm"><span class="w">mentor</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">athletes</span></span> <span class="wm"><span class="w">who</span></span> <span class="wm"><span class="w"><em>can't</em></span></span> <span class="wm"><span class="w"><em>afford</em></span></span> <span class="wm"><span class="w"><em>a</em></span></span> <span class="wm"><span class="w"><em>prep</em></span></span> <span class="wm"><span class="w"><em>school.</em></span></span></p>
+<p class="rv body"><span class="wm"><span class="w">Personalized,</span></span> <span class="wm"><span class="w">self-adjusting</span></span> <span class="wm"><span class="w">plans</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">training,</span></span> <span class="wm"><span class="w">strength,</span></span> <span class="wm"><span class="w">nutrition,</span></span> <span class="wm"><span class="w">recovery</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">school,</span></span> <span class="wm"><span class="w">all</span></span> <span class="wm"><span class="w">backed</span></span> <span class="wm"><span class="w">by</span></span> <span class="wm"><span class="w">actual</span></span> <span class="wm"><span class="w">science.</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">designed</span></span> <span class="wm"><span class="w">it,</span></span> <span class="wm"><span class="w">priced</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">built</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">myself,</span></span> <span class="wm"><span class="w">web</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">iOS.</span></span></p>
+<div class="stats count-row rv-row"><div class="stat"><span class="snum serif"><span class="cnt" data-to="50">50</span></span><span class="slab">users in the first two months</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="200">200</span>+</span><span class="slab">research papers</span></div><div class="stat"><span class="snum serif"><em class="serif" style="font-style:normal">iOS</em></span><span class="slab">launching soon</span></div></div>
+<div class="after rv-row"><a class="btn-gold" href="https://migrind.com" target="_blank" rel="noopener">Visit miGRIND<svg class="btn-ar" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
+</div>
+<figure class="phone-wrap"><div class="phone"><div class="screen"><div class="scr"><img src="assets/img/migrind-1-mentor-today.jpg" alt="miGRIND app: mentor today screen"></div><i class="island" aria-hidden="true"></i></div></div><figcaption><button type="button" class="view-btn" aria-haspopup="dialog"><svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true"><rect x="1" y="1" width="14" height="22" rx="3" fill="none" stroke="#F0CF83" stroke-width="1.6"/><rect x="5.5" y="3" width="5" height="1.4" rx=".7" fill="#F0CF83"/></svg><span class="vt">Click to view</span></button></figcaption></figure>
+</div>
+</div>
+<div class="proj" id="taap">
+<div class="col r">
+<img class="tlogo rv-fade" src="assets/img/taap-shield.png" alt="The Athlete Alliance Project" width="52" height="56"><p class="lbl rv-fade">Project 02 · Nonprofit</p>
+<h3 class="rv p-title serif"><span class="wm"><span class="w">The</span></span> <span class="wm"><span class="w">Athlete</span></span> <span class="wm"><span class="w">Alliance</span></span> <span class="wm"><span class="w">Project</span></span></h3>
+<p class="rv tag serif"><span class="wm"><span class="w">Support</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">person</span></span> <span class="wm"><span class="w"><em>behind</em></span></span> <span class="wm"><span class="w"><em>the</em></span></span> <span class="wm"><span class="w"><em>athlete.</em></span></span></p>
+<p class="rv body"><span class="wm"><span class="w">A</span></span> <span class="wm"><span class="w">nonprofit</span></span> <span class="wm"><span class="w">that</span></span> <span class="wm"><span class="w">matches</span></span> <span class="wm"><span class="w">student-athletes</span></span> <span class="wm"><span class="w">with</span></span> <span class="wm"><span class="w">mental</span></span> <span class="wm"><span class="w">health</span></span> <span class="wm"><span class="w">mentors,</span></span> <span class="wm"><span class="w">on</span></span> <span class="wm"><span class="w">a</span></span> <span class="wm"><span class="w">platform</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">built.</span></span> <span class="wm"><span class="w">Because</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">hardest</span></span> <span class="wm"><span class="w">parts</span></span> <span class="wm"><span class="w">of</span></span> <span class="wm"><span class="w">being</span></span> <span class="wm"><span class="w">an</span></span> <span class="wm"><span class="w">athlete</span></span> <span class="wm"><span class="w">rarely</span></span> <span class="wm"><span class="w">show</span></span> <span class="wm"><span class="w">up</span></span> <span class="wm"><span class="w">on</span></span> <span class="wm"><span class="w">a</span></span> <span class="wm"><span class="w">stat</span></span> <span class="wm"><span class="w">sheet.</span></span></p>
+<div class="stats count-row rv-row"><div class="stat"><span class="snum serif"><span class="cnt" data-to="10">10</span></span><span class="slab">mentors</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="30">30</span>+</span><span class="slab">mentor-athlete conversations</span></div><div class="stat"><span class="snum serif"><span class="cnt" data-to="1">1</span></span><span class="slab">Venture program launched</span></div></div>
+<div class="after rv-row"><a class="btn-gold" href="https://athleteallianceproject.com" target="_blank" rel="noopener">Visit TAAP<svg class="btn-ar" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
+</div>
+</div>
+</section>
+
+<section class="sec learned" id="learned" aria-label="Where I learned">
+<div class="car">
+<div class="car-head">
+<p class="lbl">Experience</p>
+<h2 class="h2 serif">Where <em>I learned</em></h2>
+</div>
+<div class="car-track">
+<article class="slide" id="internship">
+<div class="sc">
+<div class="orgs"><img class="org-wide" src="assets/img/sandbox-group-logo.png" alt="Sandbox Group" width="190" height="72"><img class="org-ico" src="assets/img/focus-app-icon.png" alt="Focus: Train Your Brain app icon" width="72" height="72"></div>
+<p class="role">Growth Strategy Intern · Sandbox Group · 2025</p>
+<h3 class="serif">My first look at where healthcare and <em>strategy meet.</em></h3>
+<p class="body">I worked on growth for a cognitive-training app built for elderly users with cognitive disorders, shaping the recommendations and running the channel tests behind these results.</p>
+<div class="stats"><div class="stat"><span class="snum serif">5x</span><span class="slab">user acquisition</span></div><div class="stat"><span class="snum serif">+10%</span><span class="slab">engagement time</span></div></div>
+</div>
+</article>
+<article class="slide" id="research">
+<div class="sc">
+<div class="orgs"><img class="org-ico" src="assets/img/medicine4youth-logo.png" alt="Medicine4Youth" width="72" height="72"></div>
+<p class="role">Student Researcher · Medicine4Youth · 2025</p>
+<h3 class="serif">A peer-reviewed review, <em>led start to finish.</em></h3>
+<p class="body">I led a team of five to write a peer-reviewed review on preventing depression in South Asian communities predisposed to obesity, turning public health, psychiatric and epidemiological research into recommendations for culturally sensitive care.</p>
+</div>
+</article>
+<article class="slide compact" id="coaching">
+<div class="sc">
+<div class="orgs"><img class="org-wide" src="assets/img/red-rush-logo.png" alt="Red Rush Basketball" width="194" height="72"></div>
+<p class="role">Head Coach · Red Rush Basketball · since 2025</p>
+<h3 class="serif">Game plans built on <em>film and stats.</em></h3>
+<p class="body">Now I'm head coach of a competitive travel team, breaking down film and stats to build game plans around what my players do best.</p>
+</div>
+</article>
+<article class="slide compact" id="training">
+<div class="sc">
+<p class="role">Private Trainer · since 2021</p>
+<h3 class="serif">One athlete, <em>one plan.</em></h3>
+<p class="body">It started with one athlete and one plan. I've been writing science-backed training plans grounded in exercise physiology ever since.</p>
+<div class="stats"><div class="stat"><span class="snum serif">15+</span><span class="slab">clients</span></div><div class="stat"><span class="snum serif">400+</span><span class="slab">hours of training</span></div></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec ai" id="ai" aria-label="How I use AI">
+<div class="col">
+<h2 class="rv h2 serif"><span class="wm"><span class="w">How</span></span> <span class="wm"><span class="w"><em>I</em></span></span> <span class="wm"><span class="w"><em>use</em></span></span> <span class="wm"><span class="w"><em>AI</em></span></span></h2>
+<p class="rv lead serif"><span class="wm"><span class="w">AI</span></span> <span class="wm"><span class="w">runs</span></span> <span class="wm"><span class="w">through</span></span> <span class="wm"><span class="w"><em>everything</em></span></span> <span class="wm"><span class="w"><em>I</em></span></span> <span class="wm"><span class="w"><em>build.</em></span></span></p>
+<ul class="ai-list">
+<li class="rv-fade"><b>Build</b><span>My websites, from research and planning to refining their workflows.</span></li>
+<li class="rv-fade"><b>Automate</b><span>Business operations, so each site keeps getting stronger.</span></li>
+<li class="rv-fade"><b>Research</b><span>A competitor workflow that tracks content strategies across my target audiences and turns them into content.</span></li>
+<li class="rv-fade"><b>Create</b><span>Video plans, scripts and storyboards, edited in the background with custom plugins.</span></li>
+</ul>
+<p class="ai-close rv-fade">All without a software engineer or a content strategist. Together, my personal channel, miGRIND and TAAP reach <em>50K+ views a month.</em></p>
+</div>
+</section>
+
+<section class="sec care" id="care" aria-label="What's next">
+<div class="col care-in">
+<p class="care-eye serif rv-fade"><em>What's next</em></p>
+<h2 class="rv care-h serif"><span class="wm"><span class="w">Same</span></span> <span class="wm"><span class="w">mindset,</span></span> <span class="wm"><span class="w"><em>to</em></span></span> <span class="wm"><span class="w"><em>change</em></span></span> <span class="wm"><span class="w"><em>healthcare.</em></span></span></h2>
+<p class="rv body care-b"><span class="wm"><span class="w">The</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">care,</span></span> <span class="wm"><span class="w">for</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">person,</span></span> <span class="wm"><span class="w">at</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">time.</span></span> <span class="wm"><span class="w">I</span></span> <span class="wm"><span class="w">want</span></span> <span class="wm"><span class="w">to</span></span> <span class="wm"><span class="w">help</span></span> <span class="wm"><span class="w">get</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">resources,</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">support,</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">knowledge</span></span> <span class="wm"><span class="w">and</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">right</span></span> <span class="wm"><span class="w">care</span></span> <span class="wm"><span class="w">into</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">hands</span></span> <span class="wm"><span class="w">of</span></span> <span class="wm"><span class="w">the</span></span> <span class="wm"><span class="w">people</span></span> <span class="wm"><span class="w">who</span></span> <span class="wm"><span class="w">need</span></span> <span class="wm"><span class="w">it</span></span> <span class="wm"><span class="w">most.</span></span></p>
+<div class="after rv-row"><a class="btn-gold" href="#contact" data-go="contact">Let's talk<svg class="btn-ar" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
+</div>
+</section>
+
+<footer class="sec finale" id="contact" aria-label="Contact">
+<div class="fin-grid">
+<div class="shot rv-fade">
+<div class="arch-line" aria-hidden="true"></div>
+<div class="arch"><img src="assets/img/headshot.jpg" alt="Arjun Bhardwaj in a navy blazer, smiling outdoors" loading="lazy"></div>
+</div>
+<div class="fin-copy">
+<p class="fname script rv-fade">Arjun Bhardwaj</p>
+<p class="rv fline serif"><span class="wm"><span class="w">Let's</span></span> <span class="wm"><span class="w"><em>create</em></span></span> <span class="wm"><span class="w"><em>change.</em></span></span></p>
+<div class="fcards rv-row">
+<a class="fcard" href="mailto:abhard56@uwo.ca"><span class="fk">Email</span><span class="fv">abhard56@uwo.ca</span><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+<a class="fcard" href="https://linkedin.com/in/arjun-bhardwaj-migrind" target="_blank" rel="noopener"><span class="fk">LinkedIn</span><span class="fv">arjun-bhardwaj-migrind</span><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+<a class="fcard resume-link" href="assets/Arjun-Bhardwaj-Resume.pdf" id="resume" target="_blank" rel="noopener" download="Arjun-Bhardwaj-Resume.pdf"><span class="fk">Resume</span><span class="fv">Download PDF</span><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+</div>
+</div>
+</div>
+<div class="fbar">
+<img class="fbar-logo" src="assets/img/logo.png" alt="" width="44" height="32">
+<p class="fbar-txt">Medical Sciences, Western University <i>·</i> Toronto, Ontario <i>·</i> Founder of miGRIND and The Athlete Alliance Project</p>
+<a class="fbar-top" href="#top" data-go="top">Back to top <span aria-hidden="true">&#8593;</span></a>
+</div>
+<p class="attr">&#169; 2026 Arjun Bhardwaj. Brain particles derived from the MNI ICBM152 2009a template. Copyright (C) 1993-2009 Louis Collins, McConnell Brain Imaging Centre, Montreal Neurological Institute, McGill University.</p>
+</footer>
+
+</main>
+</div>
+<script src="assets/js/three.min.js"></script>
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
